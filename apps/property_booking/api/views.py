@@ -1,7 +1,6 @@
 from django.db.models import Q
 
 from rest_framework import generics, status
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.utils.translation import gettext_lazy as _
@@ -10,7 +9,6 @@ from apps.property.models import Room
 from django.shortcuts import get_object_or_404
 
 from .serializers import RecordSerializer
-from .utils import calculate_booking_cost
 
 
 class RecordListCreateView(generics.ListCreateAPIView):
@@ -24,7 +22,7 @@ class RecordListCreateView(generics.ListCreateAPIView):
         room = get_object_or_404(Room, pk=serializer.validated_data.get('room'))
         start_date = serializer.validated_data.get('start_date')
         end_date = serializer.validated_data.get('end_date')
-        cost = calculate_booking_cost(room, start_date, end_date)
+        cost = Room.price_per_night
         record = Record.objects.create(room=room, total_cost=cost, start_date=start_date, end_date=end_date)
         return Response(status=status.HTTP_200_OK)
 

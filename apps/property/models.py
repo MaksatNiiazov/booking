@@ -113,8 +113,8 @@ class Room(CoreModel):
     )
     room_number = models.CharField(max_length=20, verbose_name=_("Номер комнаты"))
     room_type = models.CharField(max_length=20, verbose_name=_("Тип комнаты"))
-    price_per_night = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name=_("Цена за ночь")
+    default_price_per_night = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name=_("Стандартная цена за ночь")
     )
     amenities = models.ManyToManyField(
         RoomAmenity, blank=True, verbose_name=_("Удобства")
@@ -129,6 +129,13 @@ class Room(CoreModel):
 class RoomPhotos(CoreModel):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, verbose_name=_("Комната"))
     photo = models.ImageField(upload_to="room_photos", verbose_name=_("Фото"))
+
+
+class Price(CoreModel):
+    rooms = models.ManyToManyField(Room, related_name='special_prices', verbose_name=_("Комнаты"))
+    date_start = models.DateField(blank=True)
+    date_end = models.DateField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Цена за ночь"))
 
 
 class Review(models.Model):

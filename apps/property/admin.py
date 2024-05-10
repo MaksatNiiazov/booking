@@ -8,6 +8,7 @@ from .models import (
     Room,
     RoomAmenity,
     RoomPhotos,
+    Price,
 )
 
 
@@ -108,4 +109,8 @@ class RoomAmenityAdmin(admin.ModelAdmin):
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Price)
+class PriceAdmin(admin.ModelAdmin):
     pass
