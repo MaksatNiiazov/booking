@@ -1,9 +1,8 @@
 from django.urls import path
 
-from apps.property_booking.api.views import RecordListCreateView, RecordDetailView, CheckPriceRecordView
+from apps.property_booking.api import views
 
 urlpatterns = [
-    path('records/', RecordListCreateView.as_view(), name='record-list-create'),
-    path('records/<uuid:pk>/', RecordDetailView.as_view(), name='record-detail'),
-    path('records/check/', CheckPriceRecordView.as_view(), name='record_check'),
+    path('bookings/', views.BookingListCreateView.as_view(), name='booking-list-create'),
+    path('bookings/<uuid:pk>/', views.BookingDetailView.as_view(), name='booking-detail'),
 ]
