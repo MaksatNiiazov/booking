@@ -9,4 +9,9 @@ urlpatterns = [
     path('dev-admin8/', admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("docs/", include("apps.openapi.urls")),
+    path("accounts/", include("apps.accounts.urls")),
+    path("company/", include("apps.company.urls")),
+    path("property/", include("apps.property.urls")),
+    path("property_booking/", include("apps.property_booking.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

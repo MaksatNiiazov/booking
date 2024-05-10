@@ -5,14 +5,14 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
-from api.utils.validate import is_valid_uuid
 
-from api.company.paginations import MyCustomPagination
 from apps.accounts.models import Owner
-from api.company.serializers import OwnerSerializer
 
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
+
+from apps.company.api.paginations import MyCustomPagination
+from apps.company.api.serializers import OwnerSerializer
 
 
 @extend_schema_view(

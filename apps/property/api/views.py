@@ -8,7 +8,7 @@ from apps.property.models import (
     Room,
     Review
 )
-from .serializers import (
+from apps.property.api.serializers import (
     AddressSerializer,
     AmenitySerializer,
     PropertySerializer,

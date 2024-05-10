@@ -1,6 +1,6 @@
 from django.urls import path
-from api.company.views import OwnerCreateView, OwnerApplications, ConfirmOwners
 
+from apps.company.api.views import OwnerApplications, OwnerCreateView, ConfirmOwners
 
 urlpatterns = [
     path('create/owner/', OwnerCreateView.as_view()),

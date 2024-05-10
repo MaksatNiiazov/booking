@@ -7,9 +7,9 @@ from rest_framework.response import Response
 from django.utils.translation import gettext_lazy as _
 from apps.property_booking.models import Record
 from apps.property.models import Room
-from api.property_booking.serializers import RecordSerializer
 from django.shortcuts import get_object_or_404
 
+from .serializers import RecordSerializer
 from .utils import calculate_booking_cost
 
 
