@@ -205,7 +205,7 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ("rest_framework.permissions.IsAdminUser", ),
     "SERVE_AUTHENTICATION": ('rest_framework.authentication.SessionAuthentication',
                              'rest_framework.authentication.BasicAuthentication'),
-    "PREPROCESSING_HOOKS": ("api.openapi.preprocessors.get_urls_preprocessor",),
+    "PREPROCESSING_HOOKS": ("apps.openapi.preprocessors.get_urls_preprocessor",),
     "SWAGGER_UI_SETTINGS": {
         "docExpansion": "none",  # 'none' | 'list' | 'full'
     },
