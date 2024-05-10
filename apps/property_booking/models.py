@@ -9,11 +9,26 @@ User = get_user_model()
 
 
 class Booking(CoreModel):
+    STATUS_CHOICES = [
+        ('created', _("Создано")),
+        ('confirmed', _("Подтверждено")),
+        ('cancelled', _("Отменено")),
+        ('completed', _("Завершено")),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Пользователь"))
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings", verbose_name=_("Комната"))
     date_start = models.DateField(verbose_name=_("Дата начала"))
     date_end = models.DateField(verbose_name=_("Дата окончания"))
     total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Итоговая цена"))
+    adults = models.IntegerField(verbose_name=_('Количество взрослых'))
+    children = models.IntegerField(verbose_name=_('Количество детей'))
+    children_ages = models.JSONField(verbose_name=_("Возраст детей"), blank=True, null=True)
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='created',
+        verbose_name=_("Статус бронирования")
+    )
 
     class Meta:
         verbose_name = _("Бронирование")

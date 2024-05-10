@@ -1,7 +1,7 @@
 from django.contrib import admin
-from apps.property_booking.models import Record
+from apps.property_booking.models import Booking
 
 
-@admin.register(Record)
+@admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     pass

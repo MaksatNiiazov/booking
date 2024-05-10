@@ -1,6 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 
+from django_filters import rest_framework as filters
+
+from apps.property.api.filters import PropertyFilter
 from apps.property.models import (
     Address,
     Amenity,
@@ -40,6 +43,8 @@ class AmenityDetailView(generics.RetrieveUpdateDestroyAPIView):
 class PropertyListCreateView(generics.ListCreateAPIView):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = PropertyFilter
 
 
 class PropertyDetailView(generics.RetrieveUpdateDestroyAPIView):
