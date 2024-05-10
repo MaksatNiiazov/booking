@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import CoreModel
-from apps.companies.models import Company
+from apps.company.models import Company
 
 
 class Sector(CoreModel):

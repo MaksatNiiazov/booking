@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.accounts.models import Owner, UserAccount
-from apps.companies.models import Company
+from apps.company.models import Company
 
 
 class CompanySerailizer(serializers.ModelSerializer):
