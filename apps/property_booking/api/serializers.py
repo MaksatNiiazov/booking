@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from apps.property_booking.models import Record
+from apps.property_booking.models import Booking
 
 
-class RecordSerializer(serializers.ModelSerializer):
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Record
+        model = Booking
         fields = '__all__'
-        read_only_fields = ['user', 'total_cost', 'status', 'procent', 'is_active']
+        read_only_fields = ['user', 'total_price']
