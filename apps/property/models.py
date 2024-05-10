@@ -120,6 +120,8 @@ class Room(CoreModel):
         RoomAmenity, blank=True, verbose_name=_("Удобства")
     )
     available = models.BooleanField(default=True, verbose_name=_("Доступна"))
+    max_adults = models.IntegerField(verbose_name=_('Максимум взрослых'))
+    max_children = models.IntegerField(verbose_name=_('Максимум детей'))
 
     class Meta:
         verbose_name = _("Комната")
