@@ -6,6 +6,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.views import APIView
 
 from apps.accounts.api.serializers import (
     UserRegistrationSerializer,
@@ -16,11 +17,12 @@ from apps.accounts.api.serializers import (
     ChangePasswordSerializer,
     MyTokenObtainPairSerializer,
     VerifyEmailSerializer,
-    UserGetSerializer
+    UserGetSerializer,
 )
 
 from apps.accounts.models import UserAccount
 from apps.accounts.sender import send_verification_email
+from apps.company.models import Company
 
 
 class UserRegistrationView(generics.CreateAPIView):

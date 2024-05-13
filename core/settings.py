@@ -159,7 +159,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "apps/static"),)
 MEDIA_ROOT = os.path.join(BASE_DIR, "apps/media")
 MEDIA_URL = "/media/"
 
-MODELTRANSLATION_LANGUAGES = ('ru', 'ky', 'en')
+# MODELTRANSLATION_LANGUAGES = ('ru', 'ky', 'en')
 
 
 # Default primary key field type

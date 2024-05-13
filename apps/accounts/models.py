@@ -116,3 +116,5 @@ class Owner(CoreModel):
     class Meta:
         verbose_name = _("Владелец")
         verbose_name_plural = _("Владельцы")
+
+

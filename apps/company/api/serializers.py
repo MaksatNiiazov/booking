@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.accounts.models import Owner, UserAccount
-from apps.company.models import Company
+from apps.company.models import Company, Worker
 
 
 class CompanySerailizer(serializers.ModelSerializer):
@@ -29,3 +29,13 @@ class OwnerSerializer(serializers.ModelSerializer):
         print(validated_data)
         owner = Owner.objects.create(user=user, is_active=False, **validated_data)
         return owner
+
+
+
+class WorkerSerializer(serializers.ModelSerializer):
+    company_name = serializers.ReadOnlyField(source='company.name')
+    company_owner_id = serializers.ReadOnlyField(source='company.owner_id')
+
+    class Meta:
+        model = Worker
+        fields = ['id', 'user', 'company', 'company_name', 'company_owner_id']
