@@ -1,7 +1,8 @@
+from django.contrib.auth.models import Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.models import Owner
+from apps.accounts.models import Owner, UserAccount
 from apps.common.models.core import CoreModel
 
 
@@ -33,3 +34,30 @@ class Company(CoreModel):
 
     def __str__(self):
         return self.name
+
+
+class Worker(CoreModel):
+    user = models.OneToOneField(
+        UserAccount,
+        on_delete=models.PROTECT,
+        related_name="worker",
+        verbose_name=_("Пользователь"),
+    )
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="workers", verbose_name=_("Компания")
+    )
+    role = models.ForeignKey(
+        Group,
+        on_delete=models.PROTECT,
+        related_name="workers",
+        verbose_name=_("Роль"),
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return self.user.get_short_name()
+
+    class Meta:
+        verbose_name = _("Работник")
+        verbose_name_plural = _("Работники")

@@ -6,7 +6,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
-    path('dev-admin8/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("apps.accounts.urls")),
     path("company/", include("apps.company.urls")),

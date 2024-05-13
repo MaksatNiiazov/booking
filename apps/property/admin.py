@@ -24,18 +24,18 @@ class RoomPhotosInline(nested_admin.NestedTabularInline):
     fields = ["photo"]
 
 
-class RoomAmenityInline(nested_admin.NestedTabularInline):
-    model = Room.amenities.through
-    extra = 0
-    verbose_name = "Room Amenity"
-    verbose_name_plural = "Room Amenities"
+# class RoomAmenityInline(nested_admin.NestedTabularInline):
+#     model = Room.amenities.through
+#     extra = 0
+#     verbose_name = "Room Amenity"
+#     verbose_name_plural = "Room Amenities"
 
 
 class RoomInline(nested_admin.NestedTabularInline):
     model = Room
-    inlines = [RoomPhotosInline, RoomAmenityInline]
+    inlines = [RoomPhotosInline]
     extra = 0
-    fields = ["room_number", "room_type", "price_per_night", "available"]
+    fields = ["room_number", "room_type", "default_price_per_night", "available", 'max_adults', 'max_children', 'amenities']
 
 
 @admin.register(Property)
@@ -58,7 +58,6 @@ class PropertyAdmin(nested_admin.NestedModelAdmin):
         "property_type",
         "verified",
     ]
-    raw_id_fields = ["address"]
     inlines = [PropertyPhotoInline, RoomInline]
     filter_horizontal = ["amenities"]
     fieldsets = (

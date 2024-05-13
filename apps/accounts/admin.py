@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
+
 from apps.accounts.models import UserAccount, Owner
 
 
@@ -27,3 +29,6 @@ class OwnerAdmin(admin.ModelAdmin):
 
     list_display = ("inn", "is_active")
     search_fields = ("inn",)
+
+
+
