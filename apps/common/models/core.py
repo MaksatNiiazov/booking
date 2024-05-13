@@ -19,7 +19,7 @@ class CoreManager(
 
 
 class CoreModel(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    # uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     created = models.DateTimeField(
         auto_now_add=True, db_index=True, verbose_name=_("Создан")
     )

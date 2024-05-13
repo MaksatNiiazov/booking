@@ -32,6 +32,9 @@ class Address(CoreModel):
         verbose_name = _("Адрес")
         verbose_name_plural = _("Адреса")
 
+    def __str__(self):
+        return f'{self.country} {self.city} {self.line1} {self.line2}'
+
 
 class Amenity(CoreModel):
     icon = models.FileField(
@@ -50,12 +53,6 @@ class Property(CoreModel):
         ("house", _("Дом")),
         ("apartment", _("Квартира")),
         ("hotel", _("Отель")),
-    )
-    sector = models.ForeignKey(
-        Sector,
-        on_delete=models.CASCADE,
-        related_name="properties",
-        verbose_name=_("Сектор"),
     )
     property_type = models.CharField(
         max_length=20, choices=TYPE_CHOICES, verbose_name=_("Тип недвижимости")
@@ -103,6 +100,8 @@ class RoomAmenity(CoreModel):
         verbose_name = _("Удобство комнаты")
         verbose_name_plural = _("Удобства комнат")
 
+    def __str__(self):
+        return self.name
 
 class Room(CoreModel):
     hotel = models.ForeignKey(
