@@ -75,6 +75,7 @@ class Property(CoreModel):
         help_text=_("Количество доступных комнат"), verbose_name=_("Комнаты")
     )
     verified = models.BooleanField(default=False, verbose_name=_("Проверено"))
+    brand = models.CharField(max_length=100, verbose_name=_("Бренд"), blank=True, null=True)
 
     class Meta:
         verbose_name = _("Недвижимость")

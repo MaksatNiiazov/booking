@@ -11,10 +11,15 @@ class PropertyFilter(filters.FilterSet):
     adults = filters.NumberFilter()
     children = filters.NumberFilter()
     children_ages = filters.CharFilter()
+    hotel_amenities = filters.CharFilter(method='filter_by_hotel_amenities')
+    room_amenities = filters.CharFilter(method='filter_by_room_amenities')
+    star_rating = filters.CharFilter(method='filter_by_star_rating')
+    hotel_brands = filters.CharFilter(method='filter_by_hotel_brands')
 
     class Meta:
         model = Property
-        fields = ['location', 'date_start', 'date_end', 'adults', 'children', 'children_ages']
+        fields = ['location', 'date_start', 'date_end', 'adults', 'children',
+                  'children_ages', 'hotel_amenities', 'room_amenities', 'star_rating']
 
     def filter_queryset(self, queryset):
         date_start = self.request.query_params.get('date_start')
@@ -32,3 +37,28 @@ class PropertyFilter(filters.FilterSet):
             )
 
         return super().filter_queryset(queryset)
+
+    def filter_by_hotel_amenities(self, queryset, name, value):
+        amenities = value.split(',')
+        for amenity in amenities:
+            queryset = queryset.filter(amenities__name=amenity)
+        return queryset
+
+    def filter_by_room_amenities(self, queryset, name, value):
+        amenities = value.split(',')
+        for amenity in amenities:
+            queryset = queryset.filter(hotel_rooms__amenities__name=amenity)
+        return queryset
+    def filter_by_star_rating(self, queryset, name, value):
+        # value может быть строкой с несколькими вариантами оценки, разделенными запятыми
+        star_ratings = value.split(',')
+        # Мы приводим строковые значения к числовому типу для корректной фильтрации
+        star_ratings = [int(rating) for rating in star_ratings]
+        # Фильтруем недвижимость по каждой оценке
+        queryset = queryset.filter(star_rating__in=star_ratings)
+        return queryset
+
+    def filter_by_hotel_brands(self, queryset, name, value):
+        brands = value.split(',')
+        queryset = queryset.filter(brand__in=brands)
+        return queryset
