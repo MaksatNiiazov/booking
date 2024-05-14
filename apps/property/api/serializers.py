@@ -26,6 +26,7 @@ class RoomPhotosSerializer(serializers.ModelSerializer):
         fields = ['id', 'photo']
 
 
+
 class RoomSerializer(serializers.ModelSerializer):
     amenities = AmenitySerializer(many=True, read_only=True)
     photos = RoomPhotosSerializer(source='roomphotos_set', many=True, read_only=True)
@@ -41,6 +42,7 @@ class PropertySerializer(serializers.ModelSerializer):
     photos = PropertyPhotoSerializer(source='propertyphoto_set', many=True, read_only=True)
     total_rooms = serializers.SerializerMethodField()
     free_rooms = serializers.SerializerMethodField()
+    rooms = RoomSerializer(source='hotel_rooms', many=True, read_only=True)
 
     class Meta:
         model = Property
