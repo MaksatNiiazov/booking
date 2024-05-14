@@ -1,4 +1,5 @@
 from rest_framework import generics, status, permissions
+from rest_framework import generics, status
 from rest_framework.response import Response
 
 from django_filters import rest_framework as filters

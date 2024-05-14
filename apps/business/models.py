@@ -7,36 +7,22 @@ from apps.common.models import CoreModel
 from apps.company.models import Company
 
 
-class Sector(CoreModel):
+class CompanySector(CoreModel):
     class SectorName(models.TextChoices):
         HOTEL_BOOKINGS = "hotel_bookings", _("Бронирование отелей")
         CAR_RENTALS = "car_rentals", _("Аренда автомобилей")
         INTERNAL_TOURS = "internal_tours", _("Внутренние туры")
         INTERNATIONAL_TOURS = "international_tours", _("Международные туры")
         MEDICAL_TOURS = "medical_tours", _("Медицинские туры")
-
-    name = models.CharField(
+    sector = models.CharField(
         verbose_name=_("Название сектора"),
         max_length=50,
         choices=SectorName.choices,
         default=SectorName.HOTEL_BOOKINGS,
         help_text=_("Выберите сектор"),
     )
-
-    class Meta:
-        verbose_name = _("Сектор")
-        verbose_name_plural = _("Сектора")
-
-    def __str__(self):
-        return self.name
-
-
-class CompanySector(CoreModel):
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, verbose_name=_("Компания")
-    )
-    sector = models.ForeignKey(
-        Sector, on_delete=models.CASCADE, verbose_name=_("Сектор")
     )
     is_active = models.BooleanField(
         verbose_name=_("Активен"), default=True, help_text=_("Активный сектор")
@@ -48,7 +34,7 @@ class CompanySector(CoreModel):
         verbose_name_plural = _("Сектора компании")
 
     def __str__(self):
-        return self.company.name + " - " + self.sector.name
+        return self.company.name + " - " + self.sector
 
 
 def company_document_path(instance, filename):
