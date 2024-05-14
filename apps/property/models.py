@@ -103,6 +103,7 @@ class RoomAmenity(CoreModel):
     def __str__(self):
         return self.name
 
+
 class Room(CoreModel):
     hotel = models.ForeignKey(
         Property,

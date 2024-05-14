@@ -1,4 +1,5 @@
 from django_filters import rest_framework as filters
+from django.db.models import F
 
 from apps.property_booking.models import Booking
 from apps.property.models import Property
