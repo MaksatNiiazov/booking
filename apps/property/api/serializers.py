@@ -17,13 +17,13 @@ class AmenitySerializer(serializers.ModelSerializer):
 class PropertyPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PropertyPhoto
-        fields = ['uuid', 'photo']
+        fields = ['id', 'photo']
 
 
 class RoomPhotosSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomPhotos
-        fields = ['uuid', 'photo']
+        fields = ['id', 'photo']
 
 
 class RoomSerializer(serializers.ModelSerializer):

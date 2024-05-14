@@ -1,13 +1,6 @@
 from django.contrib import admin, messages
 from django.utils.translation import gettext_lazy as _
-from .models import Sector, CompanySector, Document
-
-
-@admin.register(Sector)
-class SectorAdmin(admin.ModelAdmin):
-    list_display = ["name"]
-    list_filter = ["name"]
-    search_fields = ["name"]
+from .models import CompanySector, Document
 
 
 @admin.register(CompanySector)
@@ -28,23 +21,18 @@ class CompanySectorAdmin(admin.ModelAdmin):
                 )
                 % obj.sector,
             )
-            # Отмена сохранения и откат транзакции
         else:
-            # Если все документы верифицированы или статус `verified` не установлен, сохранение происходит как обычно.
             super().save_model(request, obj, form, change)
 
     def response_change(self, request, obj):
         """Override to eliminate the default "was changed successfully" message."""
         if "_continue" not in request.POST:
-            # Проверяем, была ли ошибка при сохранении
             if messages.get_messages(request):
-                # Если были ошибки, отключаем сообщение об успешном сохранении
                 return self.response_post_save_change(request, obj)
         return super().response_change(request, obj)
 
     def response_post_save_change(self, request, obj):
         """Hook to do something after saving an object through the 'Save and continue editing' button."""
-        # Возвращаем на страницу редактирования
         return super().response_post_save_change(request, obj)
 
 

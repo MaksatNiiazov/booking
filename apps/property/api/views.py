@@ -1,4 +1,5 @@
 from rest_framework import generics, status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from django_filters import rest_framework as filters
@@ -44,6 +45,7 @@ class PropertyListCreateView(generics.ListCreateAPIView):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
     filter_backends = [filters.DjangoFilterBackend]
+    permission_classes = [AllowAny]
     filterset_class = PropertyFilter
 
 

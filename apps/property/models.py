@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
-from apps.business.models import Sector
 from apps.common.models import CoreModel
 
 User = get_user_model()
