@@ -2,8 +2,8 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from apps.property_booking.models import Booking
-from apps.property_booking.api.serializers import BookingSerializer
+from apps.property_crm.api.serializers import BookingSerializer
+from apps.property_crm.models import Booking
 
 
 class BookingListCreateView(generics.ListCreateAPIView):

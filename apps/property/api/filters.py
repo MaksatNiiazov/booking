@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from apps.property_booking.models import Booking
+from apps.property_crm.models import Booking
 from apps.property.models import Property
 
 

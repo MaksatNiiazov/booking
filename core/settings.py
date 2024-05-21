@@ -38,7 +38,7 @@ DJANGO_APPS = [
     'apps.business',
     'apps.company',
     'apps.property',
-    'apps.property_booking',
+    'apps.property_crm',
 
 ]
 

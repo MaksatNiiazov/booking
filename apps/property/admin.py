@@ -1,5 +1,7 @@
 from django.contrib import admin
 import nested_admin
+from nested_admin.nested import NestedTabularInline
+
 from .models import (
     Address,
     Amenity,
@@ -8,7 +10,7 @@ from .models import (
     Room,
     RoomAmenity,
     RoomPhotos,
-    Price,
+    Price, PaidService, PropertyPaidService,
 )
 
 
@@ -24,18 +26,17 @@ class RoomPhotosInline(nested_admin.NestedTabularInline):
     fields = ["photo"]
 
 
-# class RoomAmenityInline(nested_admin.NestedTabularInline):
-#     model = Room.amenities.through
-#     extra = 0
-#     verbose_name = "Room Amenity"
-#     verbose_name_plural = "Room Amenities"
-
 
 class RoomInline(nested_admin.NestedTabularInline):
     model = Room
     inlines = [RoomPhotosInline]
     extra = 0
     fields = ["room_number", "room_type", "default_price_per_night", "available", 'max_adults', 'max_children', 'amenities']
+
+
+class PropertyPaidServiceInline(nested_admin.NestedTabularInline):
+    model = PropertyPaidService
+    extra = 0
 
 
 @admin.register(Property)
@@ -58,7 +59,7 @@ class PropertyAdmin(nested_admin.NestedModelAdmin):
         "property_type",
         "verified",
     ]
-    inlines = [PropertyPhotoInline, RoomInline]
+    inlines = [PropertyPhotoInline, RoomInline, PropertyPaidServiceInline]
     filter_horizontal = ["amenities"]
     fieldsets = (
         (
@@ -112,4 +113,8 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Price)
 class PriceAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(PaidService)
+class PaidServiceAdmin(admin.ModelAdmin):
     pass

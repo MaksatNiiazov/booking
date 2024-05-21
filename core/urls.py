@@ -11,7 +11,7 @@ urlpatterns = [
     path("accounts/", include("apps.accounts.urls")),
     path("company/", include("apps.company.urls")),
     path("property/", include("apps.property.urls")),
-    path("property_booking/", include("apps.property_booking.urls")),
+    path("property_booking/", include("apps.property_crm.urls")),
     path("docs/", include("apps.openapi.urls")),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from apps.property_booking.models import Booking
+
+from apps.property_crm.models import Booking
 
 
 class BookingSerializer(serializers.ModelSerializer):

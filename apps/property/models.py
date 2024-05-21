@@ -164,3 +164,29 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.user.first_name} for {self.property.name}"
+
+
+class PaidService(CoreModel):
+    name = models.CharField(max_length=100, verbose_name=_("Название"))
+    description = models.TextField(blank=True, null=True, verbose_name=_("Описание"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Цена"))
+
+    class Meta:
+        verbose_name = _("Платная услуга")
+        verbose_name_plural = _("Платные услуги")
+
+    def __str__(self):
+        return self.name
+
+
+class PropertyPaidService(CoreModel):
+    """Through model for Property and PaidService many-to-many relationship."""
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, verbose_name=_("Недвижимость"))
+    service = models.ForeignKey(PaidService, on_delete=models.CASCADE, verbose_name=_("Услуга"))
+
+    class Meta:
+        verbose_name = _("Платная услуга недвижимости")
+        verbose_name_plural = _("Платные услуги недвижимости")
+
+    def __str__(self):
+        return f"{self.property.name} - {self.service.name}"
